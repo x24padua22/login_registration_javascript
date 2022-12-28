@@ -34,4 +34,10 @@ Helper.checkFields = (required_fields, req_body) => {
     return response_data;
 }
 
+Helper.checkUserSession = (req) => {
+    if(req.session && req.session.user === undefined){
+        throw new Error('You must be logged in to access this!');
+    }
+}
+
 module.exports = Helper;
