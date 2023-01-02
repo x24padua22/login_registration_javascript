@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/assets/js/wall.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Wall Page</h1>
+        <form action="/create_post" method="POST" id="create_post">
+            <input type="text" name="post">
+            <input type="submit" value="Post">
+        </form>
+
+        <ul>
+            <% for(index in DATA.posts) { 
+                let post = DATA.posts[index];
+                let comments = (post.comments) ? JSON.parse(post.comments) : []; %>
+
+                <li>
+                    <div>
+                        <span><%= post.posted_by %> - <%= post.created_at %></span>
+                        <p><%= post.post %></p>
+                    </div>
+
+                    <form action="/delete_post" method="POST" class="delete_post">
+                        <input type="hidden" name="post_id" value="<%= post.id %>">
+                        <input type="submit" value="x">
+                    </form>
+
+                    <ul>
+                        <form action="/create_comment" method="POST" class="create_comment">
+                            <input type="text" name="comment">
+                            <input type="hidden" name="post_id" value="<%= post.id %>">
+                            <input type="submit" value="Post">
+                        </form>
+
+                        <% for (comment_id in comments) {
+                            let comment = comments[comment_id] %>
+                            <div>
+                                <span><%= comment.commented_by %> - <%= comment.created_at %></span>
+                                <p><%= comment.comment %></p>
+                            </div>
+
+                            <form action="/delete_comment" method="POST" class="delete_comment">
+                                <input type="hidden" name="comment_id" value="<%= comment_id %>">
+                                <input type="submit" value="x">
+                            </form>
+                        <% } %>
+                    </ul>
+                </li>
+            <% } %>
+        </ul>
+
+    </div>
+</body>
+</html>
