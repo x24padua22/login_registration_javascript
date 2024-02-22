@@ -51,6 +51,8 @@ pipeline {
 
                         sshCommand remote: remote, command: "sudo rm -rf ${directory}/configs/sample.env.yml"
                         sshCommand remote: remote, command: "sudo mv /var/www/tmp_server_files/sample.env.yml ${directory}/configs/"
+
+                      //sadsdasd
                     }
 
                     echo currentBuild.result
