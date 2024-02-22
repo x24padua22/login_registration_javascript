@@ -43,7 +43,7 @@ pipeline {
                         sshCommand remote: remote, command: "cd ${directory} && sudo git checkout ${sourceBranch}"
                         sshCommand remote: remote, command: "cd ${directory} && sudo git pull origin ${sourceBranch}"
                         
-                        /*
+                        /* //////
                         echo "Add the BE yml file"
                         withCredentials([file(credentialsId: lp3_backend_yml, variable: 'yaml_file')]) {
                             sh 'mv \$yaml_file ./src/web-backend/server/config'
