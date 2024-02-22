@@ -27,7 +27,7 @@ pipeline {
                     echo "port is ${port}"
                     echo "directory is ${directory}"
                     echo "staging_env is ${staging_env}"
-                  //test
+                  //testd
 
                     withCredentials([sshUserPrivateKey(credentialsId: "sshadmin", keyFileVariable: 'SSH_KEY')]) {
                         def remote = [
